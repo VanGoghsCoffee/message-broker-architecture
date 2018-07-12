@@ -18,3 +18,5 @@ docker-compose up -d zookeeper
 docker-compose up -d kafka
 docker-compose up -d consumer scraper
 ```
+
+Check the logs of the consumer container for the scraping results. You can also attach to the container...
