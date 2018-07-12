@@ -1,0 +1,31 @@
+version: '3.6'
+services:
+  zookeeper:
+    image: davidrochholz/zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: davidrochholz/kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  consumer:
+    image: davidrochholz/consumer
+    depends_on:
+      - kafka
+    environment:
+      KAFKA_CONNECT: kafka:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      TOPIC: wikipedia
+  scraper:
+    image: davidrochholz/scraper
+    depends_on:
+      - kafka
+    environment:
+      KAFKA_CONNECT: kafka:9092
+      TOPIC: wikipedia
+    volumes:
+      - "/Users/daro/Netlight/SRC/message-broker-architecture/wikipedia-scraper:/usr/src/app"
