@@ -27,5 +27,4 @@ services:
     environment:
       KAFKA_CONNECT: kafka:9092
       TOPIC: wikipedia
-    volumes:
-      - "/Users/daro/Netlight/SRC/message-broker-architecture/wikipedia-scraper:/usr/src/app"
+
